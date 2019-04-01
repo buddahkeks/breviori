@@ -1,0 +1,29 @@
+{
+  "name": "dot",
+  "version": "1.0.0",
+  "description": "A URL shortener",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "Buddahkeks",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buddahkeks/dot.git"
+  },
+  "keywords": [
+    "dot",
+    "url",
+    "shortener",
+    "url-shortener"
+  ],
+  "bugs": {
+    "url": "https://github.com/buddahkeks/dot/issues"
+  },
+  "homepage": "http://buddahkeks.tk"
+}
