@@ -5,53 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dot</title>
-</head>
 
-<body>
-  <main>
-    <header>
-      <h1>Dot</h1>
-      <h3>The URL Shortener.</h3>
-      <hr />
-    </header>
-
-    <div id="main">
-      <form id="m_form">
-        <div>
-          <input id="url_in" type="text" placeholder="URL ... " autocomplete="off" />
-        </div>
-        <div>
-          <input type="submit" value="Go!" />
-        </div>
-      </form>
-    </div>
-    <div id="out_wr_div">
-      <div id="out_div"></div>
-    </div>
-  </main>
-
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
-    document.getElementById('m_form').onsubmit = e => {
-      e.preventDefault();
-
-      let u_in = document.getElementById('url_in').value;
-      if (u_in === '')
-        return;
-
-      document.getElementById('url_in').value = '';
-
-      var xhtp = new XMLHttpRequest();
-      xhtp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-          document.getElementById('out_div').innerHTML =
-            `Your new URL: <a href="${this.responseText}" target="_blank">${this.responseText}</a>`;
-        }
-      };
-      xhtp.open('GET', `/new?url=${u_in}`);
-      xhtp.send();
-    };
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-5128527877671634",
+      enable_page_level_ads: true
+    });
   </script>
+
   <style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
     @keyframes gradient-move {
       0% {
@@ -71,6 +36,18 @@
       }
     }
 
+    @keyframes text-highlight {
+      0% {
+        font-size: 20px;
+      }
+      50% {
+        font-size: 27.5px;
+      }
+      100% {
+        font-size: 20px;
+      }
+    }
+
     html,
     body {
       padding: 0;
@@ -78,10 +55,12 @@
       width: 100%;
       height: 100%;
 
-      background: linear-gradient(to right bottom, #FF54F9, #D072FF, #A64CFF);
+      background: linear-gradient(to right bottom,#FF4545, #A64CFF);
       background-size: 210% 210%;
       background-position: 0 0;
-      animation: gradient-move 10s linear 0s infinite alternate;
+      animation: gradient-move 12.5s linear 0s infinite alternate;
+
+      font-family: 'Open Sans', sans-serif;
     }
 
     main {
@@ -109,12 +88,11 @@
       font-weight: lighter;
       font-size: 3em;
       letter-spacing: 8px;
-      font-family: sans-serif;
     }
 
     header h3 {
       font-size: 12.5px;
-      font-family: monospace;
+      font-family: 'Ubuntu Mono', monospace;
       letter-spacing: 5px;
     }
 
@@ -139,7 +117,7 @@
       border-radius: 5px;
     }
 
-    #url_in:focus {
+    input:focus {
       outline: none;
     }
 
@@ -174,6 +152,10 @@
       width: 100%;
     }
 
+    input[type="submit"]:hover, input[type="submit"]:focus {
+      cursor: pointer;
+    }
+
     #out_wr_div {
       background-color: #DADADA;
       box-sizing: border-box;
@@ -188,7 +170,6 @@
       flex-direction: column;
       word-wrap: break-word;
       color: #434343;
-      font-family: sans-serif;
       margin-bottom: 75px;
     }
 
@@ -199,6 +180,11 @@
 
     #out_div a {
       color: #65C7FF;
+    }
+
+    .highlighted-text {
+      animation: text-highlight 0.4s linear 0s 1 forwards;
+      font-size: 20px;
     }
 
     @media only screen and (max-width: 750px){
@@ -212,6 +198,66 @@
       }
     }
   </style>
+</head>
+
+<body>
+  <main>
+    <!-- <nav>
+      <svg>
+        <rect x="0" y="0" fill="black" width="50" height="7.5"/>
+        <rect x="0" y="10" fill="black" width="50" height="7.5"/>
+        <rect x="0" y="10" fill="black" width="50" height="7.5"/>
+      </svg>            
+    </nav> -->
+    <header>
+      <h1>Dot</h1>
+      <h3>The URL Shortener.</h3>
+      <hr />
+    </header>
+
+    <div id="main">
+      <form id="m_form">
+        <div>
+          <input id="url_in" type="text" placeholder="URL ... " autocomplete="off" autofocus spellcheck="false"/>
+        </div>
+        <div>
+          <input type="submit" value="Go!" />
+        </div>
+      </form>
+    </div>
+    <div id="out_wr_div">
+      <div id="out_div">
+        Your shortened URL will be displayed here ...
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('m_form').onsubmit = e => {
+      e.preventDefault();
+
+      let u_in = document.getElementById('url_in').value;
+      if (u_in === '')
+        return;
+
+      document.getElementById('url_in').value = '';
+
+      var xhtp = new XMLHttpRequest();
+      xhtp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          document.getElementById('out_div').innerHTML =
+            `Your new URL: <a href="${this.responseText}" target="_blank">${this.responseText}</a>`;
+
+          document.getElementById('out_div').classList.toggle('highlighted-text');
+          window.setTimeout(() => {
+            document.getElementById('out_div').classList.toggle('highlighted-text');
+          }, 500);
+        }
+      };
+      xhtp.open('GET', `/new?url=${u_in}`);
+      xhtp.send();
+    };
+  </script>
 </body>
 
 </html>

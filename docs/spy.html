@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Doc - Root</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Fascinate+Inline');
+    @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0 0;
+            }
+
+            30% {
+                background-position: 90% 0;
+            }
+
+            60% {
+                background-position: 90% 90%;
+            }
+
+            90% {
+                background-position: 0 90%;
+            }
+        }
+
+        @keyframes disappear {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(to right bottom, #FF4545, #A64CFF);
+            background-size: 210% 210%;
+            background-position: 0 0;
+            animation: gradient-move 12.5s linear 0s infinite alternate;
+
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 60%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-family: 'Fascinate Inline', fantasy;
+            letter-spacing: 5px;
+            color: #222;
+            margin: 0;
+            margin-bottom: 25px;
+        }
+
+        input {
+            display: block;
+            margin: 5px auto;
+            border: none;
+            padding: 5px 10px;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input:disabled {
+            background-color: rgba(255,255,255,.5);
+        }
+
+        input[type="submit"] {
+            margin-top: 15px;
+            background-color: #A7009A;
+            color: #FFFDFF;
+            padding: 8px 15px;
+        }
+
+        input[type="submit"]:hover, input[type="submit"]:focus {
+            cursor: pointer;
+        }
+
+        #err_out {
+            box-sizing: border-box;
+            padding: 15px 10.5px;
+            background-color: rgba(255,253,209,.7);
+            width: 16.5rem;
+            margin: 0 auto;
+            margin-top: 15px;
+            border-radius: 5px;
+            color: #222;
+            font-family: 'Ubuntu Mono', monospace;
+            display: none;
+        }
+
+        .err_hidden {
+            animation: disappear 1.5s linear 2s 1 forwards;
+        }
+
+        @media only screen and (max-width: 600px) {
+            main {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <form id="m_form" method="post" action="/spy" enctype="application/x-www-form-urlencoded">
+            <h1>Login</h1>
+            <input type="text" value="root" disabled />
+            <input id="pwd_in" name="pwd" type="password" placeholder="Password ..." autofocus/>
+
+            <div id="err_out">Wrong Password!</div>
+
+            <input type="submit" value="Login" />
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('m_form').onsubmit = e => {
+            e.preventDefault();
+            let pwd = document.getElementById('pwd_in').value;
+
+            var xhtp = new XMLHttpRequest();
+            xhtp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    if (this.responseText.toLowerCase() === 'true') {
+                        document.getElementById('m_form').submit();
+                    } else {
+                        let err_out = document.getElementById('err_out');
+
+                        err_out.style.display = 'block';
+                        err_out.classList.toggle('err_hidden');
+                        
+                        window.setTimeout(() => {
+                            err_out.style.display = 'none';
+                            err_out.classList.toggle('err_hidden');
+                        }, 3500);
+                    }
+                }
+            };
+            xhtp.open('GET', `/a/check?pwd=${pwd}`);
+            xhtp.send();
+        };
+    </script>
+</body>
+
+</html>

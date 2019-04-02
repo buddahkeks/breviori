@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dot - 404</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #fff;
+        }
+        main {
+            box-sizing: border-box;
+            width: 60%;
+            margin: 0 auto;
+            background: linear-gradient(45deg, #FF4545, #A64CFF);
+            padding: 2.5px 0;
+        }
+        h1 {
+            display: block;
+            box-sizing: border-box;
+            letter-spacing: 5px;
+            font-size: 2.25em;
+            font-weight: lighter;
+            background: #fff;
+            height: 100%;
+            margin: 0;
+            padding: 75px;
+        }
+        .error-code {
+            background: -webkit-linear-gradient(45deg, #A93AFF, #FF4545, #A64CFF);
+            background: linear-gradient(45deg, #A93AFF, #FF4545, #A64CFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-right: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .error-code {
+                font-size: 1em;
+                display: block;
+                margin: 0;
+            }
+            .error-explanation {
+                font-size: .5em;
+            }
+            h1 {
+                padding: 75px 0;
+                line-height: .85em;
+            }
+            main {
+                width: 80%;
+            }
+        }
+        @media only screen and (min-width: 600px) and (max-width: 1075px) {
+            .error-code {
+                font-size: 1.5em;
+                display: block;
+                margin: 0;
+            }
+            .error-explanation {
+                font-size: .8em;
+            }
+            h1 {
+                padding: 75px 0;
+                line-height: 1.35em;
+            }
+            main {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1><span class="error-code">Error 404:</span><span class="error-explanation">Redirect-URL not found!</span></h1>
+    </main>
+</body>
+
+</html>
